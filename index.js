@@ -29,7 +29,7 @@ const readJsonFile = function () {
 
     return tasksObj;
   } catch (err) {
-    console.error('Error reading file:', err);
+    return [];
   }
 };
 
