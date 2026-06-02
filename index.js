@@ -65,6 +65,8 @@ const updateTask = function (taskUpdateInfo) {
   tasksObj[elementIndex].updatedAt = Date.now();
 
   writeJsonFile(tasksObj);
+
+  console.log(`Task updated successfully (ID: ${elementIndex})`);
 };
 
 const markInProgress = function (id) {
@@ -76,6 +78,8 @@ const markInProgress = function (id) {
   tasksObj[elementIndex].updatedAt = Date.now();
 
   writeJsonFile(tasksObj);
+
+  console.log(`Task is marked as in-progress (ID: ${elementIndex})`);
 };
 
 const markDone = function (id) {
@@ -87,6 +91,8 @@ const markDone = function (id) {
   tasksObj[elementIndex].updatedAt = Date.now();
 
   writeJsonFile(tasksObj);
+
+  console.log(`Task is marked as done (ID: ${elementIndex})`);
 };
 
 const deleteTask = function (id) {
@@ -97,15 +103,20 @@ const deleteTask = function (id) {
   if (index > -1) tasksObj.splice(elementIndex, 1);
 
   writeJsonFile(tasksObj);
+
+  console.log(`Task deleted successfully (ID: ${elementIndex})`);
 };
 
 const listTasks = function (listFilter) {
   const tasksObj = readJsonFile();
+  let found = false;
 
   for (const task of tasksObj) {
     const { id, description, status, createdAt, updatedAt } = task;
 
     if (listFilter.length !== 0 && listFilter[0] !== status) continue;
+
+    found = true;
 
     console.log(`\nTask:`);
     console.log(`  id ${id}:`);
@@ -114,6 +125,9 @@ const listTasks = function (listFilter) {
     console.log(`  Created at: ${DisplayDate(createdAt)}`);
     console.log(`  Updated at: ${DisplayDate(updatedAt)}`);
   }
+
+  if (!found && listFilter.length !== 0)
+    console.log(`There is no tasks marked as ${listFilter[0]}`);
 };
 
 const taskTracker = function () {
