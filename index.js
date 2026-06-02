@@ -111,6 +111,8 @@ const listTasks = function (listFilter) {
   const tasksObj = readJsonFile();
   let found = false;
 
+  if (tasksObj.length === 0) console.log(`You don't have any tasks!`);
+
   for (const task of tasksObj) {
     const { id, description, status, createdAt, updatedAt } = task;
 
@@ -126,7 +128,7 @@ const listTasks = function (listFilter) {
     console.log(`  Updated at: ${DisplayDate(updatedAt)}`);
   }
 
-  if (!found && listFilter.length !== 0)
+  if (!found && listFilter.length !== 0 && tasksObj.length !== 0)
     console.log(`There is no tasks marked as ${listFilter[0]}`);
 };
 
