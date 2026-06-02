@@ -1,0 +1,44 @@
+[
+  {
+    "id": 0,
+    "description": "Buy games",
+    "status": "todo",
+    "createdAt": 1780346335092,
+    "updatedAt": 1780346335092
+  },
+  {
+    "id": 1,
+    "description": "Clean your room",
+    "status": "todo",
+    "createdAt": 1780346341837,
+    "updatedAt": 1780346341837
+  },
+  {
+    "id": 2,
+    "description": "Call your father",
+    "status": "in-progress",
+    "createdAt": 1780347909849,
+    "updatedAt": 1780347909849
+  },
+  {
+    "id": 3,
+    "description": "Plan Your Week",
+    "status": "done",
+    "createdAt": 1780347924182,
+    "updatedAt": 1780347924182
+  },
+  {
+    "id": 4,
+    "description": "Update your cv",
+    "status": "todo",
+    "createdAt": 1780349975177,
+    "updatedAt": 1780349975177
+  },
+  {
+    "id": 5,
+    "description": "Work on Project Prime",
+    "status": "todo",
+    "createdAt": 1780355732760,
+    "updatedAt": 1780355732760
+  }
+]
