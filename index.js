@@ -73,42 +73,6 @@ const updateTask = function (taskUpdateInfo) {
   console.log(`Task updated successfully (ID: ${index})`);
 };
 
-// const markInProgress = function (idList) {
-//   const tasksObj = readJsonFile();
-//   const index = Number(idList[0]);
-//   const elementIndex = tasksObj.findIndex(task => task.id === index);
-//
-//   if (elementIndex === -1) {
-//     console.log(`Task not found (ID: ${index})`);
-//     return;
-//   }
-//
-//   tasksObj[elementIndex].status = 'in-progress';
-//   tasksObj[elementIndex].updatedAt = Date.now();
-//
-//   writeJsonFile(tasksObj);
-//
-//   console.log(`Task is marked as in-progress (ID: ${index})`);
-// };
-//
-// const markDone = function (idList) {
-//   const tasksObj = readJsonFile();
-//   const index = Number(idList[0]);
-//   const elementIndex = tasksObj.findIndex(task => task.id === index);
-//
-//   if (elementIndex === -1) {
-//     console.log(`Task not found (ID: ${index})`);
-//     return;
-//   }
-//
-//   tasksObj[elementIndex].status = 'done';
-//   tasksObj[elementIndex].updatedAt = Date.now();
-//
-//   writeJsonFile(tasksObj);
-//
-//   console.log(`Task is marked as done (ID: ${index})`);
-// };
-
 const markStatus = function (idList, status) {
   const tasksObj = readJsonFile();
 
