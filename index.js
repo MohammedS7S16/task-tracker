@@ -79,8 +79,6 @@ const markStatus = function (idList, status) {
   const index = Number(idList[0]);
   const elementIndex = tasksObj.findIndex(task => task.id === index);
 
-  const statusArr = status.split('-');
-
   if (elementIndex === -1) {
     console.log(`Task not found (ID: ${index})`);
     return;
