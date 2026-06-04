@@ -58,41 +58,76 @@ const addTask = function (taskWords) {
 const updateTask = function (taskUpdateInfo) {
   const tasksObj = readJsonFile();
   const index = Number(taskUpdateInfo.shift());
-
   const elementIndex = tasksObj.findIndex(task => task.id === index);
+
+  if (elementIndex === -1) {
+    console.log(`Task not found (ID: ${index})`);
+    return;
+  }
 
   tasksObj[elementIndex].description = taskUpdateInfo.join(' ');
   tasksObj[elementIndex].updatedAt = Date.now();
 
   writeJsonFile(tasksObj);
 
-  console.log(`Task updated successfully (ID: ${elementIndex})`);
+  console.log(`Task updated successfully (ID: ${index})`);
 };
 
-const markInProgress = function (id) {
+// const markInProgress = function (idList) {
+//   const tasksObj = readJsonFile();
+//   const index = Number(idList[0]);
+//   const elementIndex = tasksObj.findIndex(task => task.id === index);
+//
+//   if (elementIndex === -1) {
+//     console.log(`Task not found (ID: ${index})`);
+//     return;
+//   }
+//
+//   tasksObj[elementIndex].status = 'in-progress';
+//   tasksObj[elementIndex].updatedAt = Date.now();
+//
+//   writeJsonFile(tasksObj);
+//
+//   console.log(`Task is marked as in-progress (ID: ${index})`);
+// };
+//
+// const markDone = function (idList) {
+//   const tasksObj = readJsonFile();
+//   const index = Number(idList[0]);
+//   const elementIndex = tasksObj.findIndex(task => task.id === index);
+//
+//   if (elementIndex === -1) {
+//     console.log(`Task not found (ID: ${index})`);
+//     return;
+//   }
+//
+//   tasksObj[elementIndex].status = 'done';
+//   tasksObj[elementIndex].updatedAt = Date.now();
+//
+//   writeJsonFile(tasksObj);
+//
+//   console.log(`Task is marked as done (ID: ${index})`);
+// };
+
+const markStatus = function (idList, status) {
   const tasksObj = readJsonFile();
-  const index = Number(id[0]);
+
+  const index = Number(idList[0]);
   const elementIndex = tasksObj.findIndex(task => task.id === index);
 
-  tasksObj[elementIndex].status = 'in-progress';
+  const statusArr = status.split('-');
+
+  if (elementIndex === -1) {
+    console.log(`Task not found (ID: ${index})`);
+    return;
+  }
+
+  tasksObj[elementIndex].status = status;
   tasksObj[elementIndex].updatedAt = Date.now();
 
   writeJsonFile(tasksObj);
 
-  console.log(`Task is marked as in-progress (ID: ${elementIndex})`);
-};
-
-const markDone = function (id) {
-  const tasksObj = readJsonFile();
-  const index = Number(id[0]);
-  const elementIndex = tasksObj.findIndex(task => task.id === index);
-
-  tasksObj[elementIndex].status = 'done';
-  tasksObj[elementIndex].updatedAt = Date.now();
-
-  writeJsonFile(tasksObj);
-
-  console.log(`Task is marked as done (ID: ${elementIndex})`);
+  console.log(`Task is marked as ${status} (ID: ${index})`);
 };
 
 const deleteTask = function (id) {
@@ -100,11 +135,15 @@ const deleteTask = function (id) {
   const index = Number(id[0]);
   const elementIndex = tasksObj.findIndex(task => task.id === index);
 
-  if (index > -1) tasksObj.splice(elementIndex, 1);
+  if (elementIndex === -1) {
+    console.log(`Task not found (ID: ${index})`);
+    return;
+  }
 
+  tasksObj.splice(elementIndex, 1);
   writeJsonFile(tasksObj);
 
-  console.log(`Task deleted successfully (ID: ${elementIndex})`);
+  console.log(`Task deleted successfully (ID: ${index})`);
 };
 
 const listTasks = function (listFilter) {
@@ -154,16 +193,21 @@ const taskTracker = function () {
         deleteTask(userInputArr);
         break;
       case 'mark-in-progress':
-        markInProgress(userInputArr);
+        markStatus(userInputArr, 'in-progress');
         break;
       case 'mark-done':
-        markDone(userInputArr);
+        markStatus(userInputArr, 'done');
         break;
       case 'list':
         listTasks(userInputArr);
         break;
-      default:
+      case 'quit':
+      case 'exit':
+      case 'end':
         keepRunning = false;
+        break;
+      default:
+        console.log('Unkown command!');
         break;
     }
   }
